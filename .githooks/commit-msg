@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# commit-msg hook — keeps this repository's history free of AI / bot attribution.
+#
+# It strips any "Co-authored-by:" / "Generated with" / "Created with" trailer that
+# references Claude, Anthropic, Copilot, an AI assistant or a bot from the commit
+# message before the commit is recorded. This guarantees commits remain attributed
+# to the repository owner only, even if a tool tries to append such a trailer.
+#
+# Enabled via:  git config core.hooksPath .githooks
+#
+set -e
+
+MSG_FILE="$1"
+[ -f "$MSG_FILE" ] || exit 0
+
+# Remove offending trailer lines (case-insensitive).
+sed -E -i.bak \
+  -e '/^[Cc]o-[Aa]uthored-[Bb]y:.*([Cc]laude|[Aa]nthropic|[Cc]opilot|AI |[Bb]ot|noreply@anthropic)/d' \
+  -e '/[Gg]enerated with .*([Cc]laude|[Aa]nthropic|AI)/d' \
+  -e '/[Cc]reated with .*([Cc]laude|[Aa]nthropic|AI)/d' \
+  "$MSG_FILE"
+
+rm -f "$MSG_FILE.bak"
+exit 0

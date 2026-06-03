@@ -1,0 +1,7 @@
+# Normalize line endings. Keep shell scripts / git hooks LF so they run on any OS.
+* text=auto eol=lf
+.githooks/* text eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.ico binary

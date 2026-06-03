@@ -195,6 +195,12 @@ point the hero button to it.
 - The contact form posts to Formspree (when configured) or opens the visitor's
   email client — no backend secrets required.
 - All external links use `rel="noopener noreferrer"`.
+- CI workflows run with least-privilege `permissions` (`contents: read`).
+- A tracked `commit-msg` hook (enable with `git config core.hooksPath .githooks`)
+  keeps history attributed to the owner only — see [CONTRIBUTING](CONTRIBUTING.md#git-hooks-one-time).
+- **Note:** GitHub Pages is a static host and cannot emit HTTP security headers
+  (CSP/HSTS). For header-level hardening, deploy behind a platform/CDN that supports
+  custom response headers (e.g. Vercel/Cloudflare).
 
 ## 📄 License
 

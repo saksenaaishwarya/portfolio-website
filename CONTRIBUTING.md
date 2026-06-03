@@ -14,6 +14,19 @@ npm run dev
 
 The app runs at http://localhost:3000.
 
+## Git hooks (one-time)
+
+This repository ships a tracked `commit-msg` hook that keeps history attributed to
+the project owner only. Enable it once after cloning:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The hook automatically strips any `Co-authored-by:` / "Generated with" / "Created with"
+trailer that references Claude, Anthropic, Copilot, an AI assistant or a bot. Commits
+must use your own Git identity and carry no AI/bot co-author attribution.
+
 ## Branch strategy
 
 - `main` — production. Every push deploys to GitHub Pages.
